@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-function Drop() {
-  const [allFiles, setAllFiles] = useState([]);
+function Drop({allFiles, setAllFiles}) {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -22,7 +21,7 @@ function Drop() {
 
   return (
     <section className="cursor-pointer">
-      <div {...getRootProps({ className: 'dropzone' })}>
+      <div {...getRootProps({ className: 'dropzone mb-4' })}>
         <input {...getInputProps()} />
         <div className="flex flex-col border-2 rounded-lg border-dashed bg-custom-grey px-20 py-10">
           <h1 className="text-custom-dark-grey text-2xl ml-2">
@@ -33,10 +32,11 @@ function Drop() {
           </h1>
         </div>
       </div>
-      <aside>
-        <h4>Uploaded files</h4>
-        <ul>{files}</ul>
+      <aside className="mb-4">
+        <h4 className="mb-2 text-xl">Uploaded files</h4>
+        <ul className="bg-white p-4 rounded border">{files}</ul>
       </aside>
+
     </section>
   )
 }
