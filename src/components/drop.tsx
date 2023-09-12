@@ -8,10 +8,6 @@ function Drop({ allFiles, setAllFiles }) {
     },
   });
 
-  useEffect(() => {
-    console.log(allFiles);
-  }, [allFiles]);
-
   const files = allFiles.map((file) => (
     <li key={file.path}>
       {file.path} - {file.size} bytes

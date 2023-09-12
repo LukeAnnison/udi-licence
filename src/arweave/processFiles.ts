@@ -2,15 +2,14 @@ import { uploadFile, uploadEncryptedData } from "./uploadFile.ts";
 import { encryptFile } from "./encrypt.ts";
 
 export const processFiles = async (
-  allFiles,
-  setProgress,
-  setAllFilesUploaded,
-  selected,
+  allFiles: File[],
+  setAllFilesUploaded: (success: boolean) => void,
+  selected: string,
 ) => {
   console.log("Starting file processing...");
-  const failedFiles = [];
+  const failedFiles: string[] = [];
 
-  const uploadPromises = allFiles.map(async (file, index) => {
+  const uploadPromises = allFiles.map(async (file) => {
     console.log(`Processing file: ${file.name}`);
 
     try {
@@ -18,11 +17,10 @@ export const processFiles = async (
         const encryptedFile = await encryptFile(file);
         await uploadEncryptedData(encryptedFile);
       } else {
-        await uploadFile(file);
+        await uploadFile(file, selected);
       }
 
       console.log(`File uploaded: ${file.name}`);
-      setProgress(index + 1);
     } catch (error) {
       console.error(`Error uploading ${file.name}:`, error);
       failedFiles.push(file.name);

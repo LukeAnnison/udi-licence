@@ -7,8 +7,6 @@ function Model({ selected, setSelected }) {
         return "Creative Commons Zero";
       case "UDL":
         return "Universal Data License";
-      case "XDL":
-        return "Extended Data License";
       case "Encryption":
         return "Encrypted Data";
       default:
